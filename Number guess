@@ -1,0 +1,52 @@
+import random
+
+def ngGame():
+    print("============================================")
+    print("Number guess game")
+    print("============================================")
+
+    MAX_GUESSES = 5
+    CORRECT = random.choice(range(0,101))
+
+    num_guesses = 0
+    run_game = True
+    while run_game:
+        while True:
+            try:
+                guess = int(input("Pick a number between 0 - 100: "))
+                num_guesses += 1
+            except ValueError:
+                print("Please only enter integers!")
+            except:
+                print("IDK what you did to get this error but wrong input.")
+            else:
+                break
+
+        if guess == CORRECT:
+            print("You guessed it!")
+            if input("Wanna go again? ") == "y":
+                CORRECT = random.choice(range(0,101))
+                num_guesses = 0
+                continue
+            else:
+                run_game = False
+        elif guess < CORRECT and guess > CORRECT - 5:
+            print("You are just little bit short.")
+        elif guess > CORRECT and guess < CORRECT + 5:
+            print("Just a little too big.")
+        elif guess < CORRECT:
+            print("Too small.")
+        elif guess > CORRECT:
+            print("Too large.")
+
+        if num_guesses >= MAX_GUESSES:
+            print("You are out of guesses.")
+            if input("Wanna go again? ") == "y":
+                CORRECT = random.choice(range(0,101))
+                num_guesses = 0
+                continue
+            else:
+                run_game = False
+
+if __name__ == "__main__":
+    ngGame()
